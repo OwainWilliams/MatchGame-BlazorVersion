@@ -1,0 +1,56 @@
+﻿@page "/"
+
+<style>
+    .container{
+        width: 400px;
+    }
+    button {
+        width: 100px;
+        height: 100px;
+        font-size: 50px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        @foreach(var christmas in shuffleChristmas)
+        { 
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-dark">
+                    <h1>@christmas</h1>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
+
+@code{
+    List<string> christmasEmoji = new List<string>()
+    {
+        "🎅","🎅",
+        "🎄","🎄",
+        "🤶","🤶",
+        "🦌","🦌",
+        "🎁","🎁",
+        "🦃","🦃",
+        "⛄","⛄",
+        "🧚‍","🧚‍",
+
+    };
+
+    List<string> shuffleChristmas = new List<string>();
+    protected override void OnInitialized()
+    {
+        SetUpGame();
+    }
+
+    private void SetUpGame()
+    {
+        Random random = new Random();
+        shuffleChristmas = christmasEmoji
+            .OrderBy(item => random.Next())
+            .ToList();
+    }
+
+}
